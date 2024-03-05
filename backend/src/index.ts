@@ -23,10 +23,16 @@ app.use('/api/v1/blog/*', async (c, next) => {
 	const token = jwt.split(' ')[1];
 	const payload = await verify(token, c.env.JWT_SECRET);
 	if (!payload) {
+    c.set('userId', payload.id);
 		c.status(401);
 		return c.json({ error: "unauthorized" });
 	}
-	c.set('userId', payload.id);
+
+  else {
+    return c.json({
+      msg : "Invalid Token"
+    })
+  }
 	await next()
 })
 
@@ -57,7 +63,7 @@ app.post('/api/v1/signup', async (c) => {
 		return c.json({ user , token : jwt });
 	} catch(e) {
 		c.status(403);
-		return c.json({ error: "error while signing up" });
+		return c.json({ error: "Error while signing up" });
 	}
 })
 

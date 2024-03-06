@@ -1,3 +1,4 @@
+import { createBlogInput, updateBlogInput } from "@ash7007/medium-common";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
@@ -73,6 +74,14 @@ blogRouter.post("/blog", async (c) => {
     console.log(authorId, "authid");
 
     try {
+        const { success } = createBlogInput.safeParse(body);
+        if (!success) {
+          c.status(403);
+          return c.json({
+            success: false,
+            msg: "Invalid Inputs",
+          });
+        }
         // do validation checks
         const blog = await prisma.post.create({
             data: {
@@ -106,6 +115,14 @@ blogRouter.put("/blog", async (c) => {
     const authorId = c.get("userId");
 
     try {
+        const { success } = updateBlogInput.safeParse(body);
+        if (!success) {
+          c.status(403);
+          return c.json({
+            success: false,
+            msg: "Invalid Inputs",
+          });
+        }
         // do validation checks
         const blog = await prisma.post.update({
             where: {
@@ -135,7 +152,7 @@ blogRouter.put("/blog", async (c) => {
 });
 
 // TODO : Add Pagination
-blogRouter.get("/blog", async (c) => {
+blogRouter.get("/blog",  async (c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());

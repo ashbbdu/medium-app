@@ -39,9 +39,9 @@ userRouter.post("/signup", async (c) => {
       },
     });
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
-    return c.json({ user, token: jwt });
+    return c.json({ user, token: jwt , msg : "User created Successfully" , success : true});
   } catch (e) {
-    console.log(e, "eroor");
+
 
     c.status(403);
     return c.json({ error: "Error while signing up" });

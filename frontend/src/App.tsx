@@ -11,8 +11,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth />} />
         <Route path="/signup" element={<Auth />} />
-        <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog/:id" element={<Blog />} />
+        <Route path="/blogs"  element={<Blogs />}  />
       </Routes>
     </div>
   );

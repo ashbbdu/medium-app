@@ -12,6 +12,7 @@
   "dependencies": {
     "@ash7007/medium-common": "^1.0.1",
     "axios": "^1.6.7",
+    "draft-js": "^0.11.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1"

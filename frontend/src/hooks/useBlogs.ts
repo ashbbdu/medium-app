@@ -36,12 +36,14 @@ export const useBlogs = () => {
     }
 }
 
-export const useBlogsById = async ({id} : {id : string}) => {
+export const useBlogsById = (id : number) => {
+    console.log(id , "id");
+    
     const token = localStorage.getItem("token");
     const [loading , setLoading] = useState(false)
     const [blog , setBlog] = useState<Blogs>();
 
-    const getBlogs = async () => {
+    const getBlog = async () => {
         setLoading(true)
         const response = await axios.get(`${BACKEND_URL}/blogs/blog/${id}`, {
             headers: {
@@ -49,15 +51,16 @@ export const useBlogsById = async ({id} : {id : string}) => {
             }
         })
         setLoading(false)
-        setBlogs(response.data.blog)
+        setBlog(response.data.blog)
+        console.log(response.data.blog , "data");
     }
 
     useEffect(() => {
-        getBlogs();
+        getBlog();
     }, [])
 
     return {
         loading,
-        blogs
+        blog
     }
 }

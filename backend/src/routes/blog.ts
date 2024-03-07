@@ -205,7 +205,6 @@ blogRouter.get("/blog/:id", async (c) => {
                 }
             }
         });
-        console.log(id, typeof id, "id");
 
         c.status(200);
         return c.json({

@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import Appbar from "../components/Appbar";
 import BlogCard from "../components/BlogCard";
 import { useBlogs } from "../hooks/useBlogs";
 
@@ -12,13 +10,13 @@ const Blogs = () => {
   }
 
   return (
-    <div>
-      <Appbar />
+
       <div className="max-w-xl mx-auto">
         {blogs.map((res) => {
           return (
           
             <BlogCard
+              key={res.id}
               id={res.id}
               authorName={res.author.name || "Anonymous"}
               title={res.title}
@@ -29,7 +27,6 @@ const Blogs = () => {
           );
         })}
       </div>
-    </div>
   );
 };
 

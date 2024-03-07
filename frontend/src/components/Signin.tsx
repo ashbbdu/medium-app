@@ -20,7 +20,7 @@ const Signin = () => {
       if (response.status === 200) {
         navigate("/blogs");
         localStorage.setItem("token", response.data.token);
-        toast.success(response.data.msg);
+        toast.success(response.data.message);
       }
     } catch (error : any) {
       toast.error(error.response.data.msg);

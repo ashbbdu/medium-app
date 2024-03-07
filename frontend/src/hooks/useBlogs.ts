@@ -37,7 +37,6 @@ export const useBlogs = () => {
 }
 
 export const useBlogsById = (id : number) => {
-    console.log(id , "id");
     
     const token = localStorage.getItem("token");
     const [loading , setLoading] = useState(false)
